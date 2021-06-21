@@ -2,9 +2,9 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const path = require('path');
 
-const { app: posts } = require('./routes/posts');
-
 const app = express();
+
+const { app: routes } = require('./routes/index');
 
 const startServer = async () => {
 	app.use((req, res, next) => {
@@ -14,8 +14,7 @@ const startServer = async () => {
 		next();
 	});
 
-	app.use(express.json);
-	app.use(posts);
+	app.use(routes);
 
 	app.listen(PORT, () => {
 		console.log(`Listening on port: ${PORT}`);
